@@ -1,0 +1,55 @@
+<div class="container mt-4">
+  <div class="row">
+  <div class="col-md-5">
+   <div class="card card-body">
+     <a href="http://www.greenpowermonitor.com/?lang=es" target="_blank"><img width="350" alt="Angular Logo" class="mx-auto" src="../../../assets/Logo1.png"></a>
+     <form>
+       <div class="form-group">
+          <input type="text" class="form-control mt-2" placeholder="Insert Parent Node !!!" #newNode>
+       </div>
+       <button (click)="gettreeFatherNew(newNode)" class="btn btn-success btn-block mt-2">Show New Tree !!!</button>
+       <button (click)="gettreeAddNode(newNode,Folder,File)" class="btn btn-success btn-block mt-2">Add new Node</button>
+       <div class="form-group mt-3">
+         <div class="form-control green move">
+            <label class="radio-inline text-white">
+                <input type="radio" name="Folder"value="Folder" class=""  #Folder>Type Folder
+            </label>
+            <label class="radio-inline text-white">
+               <input type="radio" name="Folder" value="File" class="dere" #File>Type File
+            </label>
+         </div>
+       </div>
+       <button (click)="gettreeMoveNode(newNode)" class="btn btn-success btn-block mt-2">Move Node</button>
+       <button (click)="gettreeDeleteNode(newNode)" class="btn btn-success btn-block mt-2">Delete Node</button>
+       <button (click)="openClose()" class="btn btn-success btn-block mt-2">Expand && Collapse</button>
+      </form>
+   </div>
+  </div>
+  <div class="col-md-7">
+    <div class="card card-bady">
+      <mat-tree #tree [dataSource]="dataSource" [treeControl]="treeControl">
+        <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle matTreeNodePadding>
+          <button mat-icon-button (click)="getSrc(node)">
+          <mat-icon class="type-icon" [attr.aria-label]="node.type + 'icon'">
+            {{ node.type === 'file' ? 'description' : 'folder' }}
+          </mat-icon>
+          {{node.name}}
+          </button>
+        </mat-tree-node>
+      </mat-tree>
+    </div>
+  </div>
+</div>
+<div *ngIf="pdfSrc" class="row">
+  <div class="col-md-12 mt-1 mx-auto">
+    <pdf-viewer [src]="pdfSrc" [render-text]="true" [page] = "page" [show-all]="true" style="display: block;">
+    </pdf-viewer>
+  </div>
+</div>
+</div>
+
+
+
+
+
+
